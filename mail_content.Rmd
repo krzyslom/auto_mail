@@ -1,0 +1,36 @@
+---
+output: 
+    html_document:
+        theme: null
+        highlight: null
+        mathjax: null
+params:
+  form: user_data
+---
+
+<!-- Powyższe ustawienia html_document są niezbędne w celu przesłania pliku html w body wiadomości (nie może zawierać JavaScript). -->
+
+<!-- Parametry osoby przekazywane są ze skryptu send_mail przez rmarkdown::render(params). W tym wypadku wyraz user_data mógłby być dowolny (ale musi istnieć). -->
+
+<!-- Niestety, przesyłanie grafiki np. z logo koła nie działa. -->
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
+```
+
+```{r results = "asis"}
+cat(paste0("Witaj, **", params$form$Imię, " ", params$form$Nazwisko, "**!"))
+```
+
+Dziękujemy Ci za zarejestrowanie się na warsztaty. Poniżej dostępne są dane przesłane przez Ciebie w formularzu.
+
+```{r results = "asis"}
+params$form %>%
+  dplyr::select(-email) %>%
+  tidyr::gather(key = Formularz, value = Dane) %>%
+  knitr::kable()
+```
+
+Z wyrazami szacunku
+
+Organizatorzy
