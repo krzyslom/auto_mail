@@ -31,6 +31,5 @@ params$form %>%
   knitr::kable()
 ```
 
-Z wyrazami szacunku
-
+Z wyrazami szacunku<br>
 Organizatorzy
